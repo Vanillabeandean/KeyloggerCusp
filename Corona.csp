@@ -1,0 +1,48 @@
+	.equ Keyboard_Status, $000
+	.equ Keyboard_Data, $001
+
+Word:	Char, 'get pwned'
+
+Poll_KeyBD:	inb Keyboard_Status
+	jge Poll_KeyBD
+	inb Keyboard_Data
+
+	cma $064
+	jeq CheckAll
+	psha
+	jmp Poll_KeyBD
+
+CheckAll: 	popa
+	cma $065
+	jgt Poll_KeyBD
+	jlt Poll_KeyBD
+	
+	popa
+	cma $06E
+	jgt Poll_KeyBD
+	jlt Poll_KeyBD
+	
+	popa
+	cma $077
+	jgt Poll_KeyBD
+	jlt Poll_KeyBD
+	
+	popa
+	cma $070
+	jgt Poll_KeyBD
+	jlt Poll_KeyBD
+	
+	popa
+	cma $074
+	jgt Poll_KeyBD
+	jlt Poll_KeyBD
+	
+	popa
+	cma $065
+	jgt Poll_KeyBD
+	jlt Poll_KeyBD
+	
+	popa
+	cma $067
+	jgt Poll_KeyBD
+	jlt Poll_KeyBD
